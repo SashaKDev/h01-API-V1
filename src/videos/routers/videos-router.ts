@@ -59,7 +59,7 @@ videosRouter.put('/:id', (req: Request, res: Response) => {
     if(errors.length > 0) {
         res
             .status(400)
-            .json(errors[0]);
+            .json({errorsMessages: errors});
         return;
     }
 
