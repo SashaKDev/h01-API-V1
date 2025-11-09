@@ -1,5 +1,5 @@
 import express, {Express} from "express";
-import {videosRouter} from "./videos/videos-router";
+import {videosRouter} from "./videos/routers/videos-router";
 import {testingRouter} from "./testing/testing-router";
 
 

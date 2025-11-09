@@ -1,8 +1,8 @@
 import express, {Request, Response} from "express";
-import {db} from "../db/in-memory.db";
-import {VideosInputDto} from "./dto/videos-input.dto";
-import {AvailableResolutions, Videos} from "./types/types";
-import {videosInputDtoValidation} from "./validation/videosInputDtoValidation";
+import {db} from "../../db/in-memory.db";
+import {Videos} from "../types/types";
+import {videosInputDtoValidation} from "../validation/videosInputDtoValidation";
+import {videosUpdateDtoValidation} from "../validation/videosUpdateDtoValidation";
 
 
 export const videosRouter = express.Router({});
@@ -53,4 +53,28 @@ videosRouter.post('/', (req: Request, res: Response) => {
         .status(201)
         .json(createdVideo);
 });
+videosRouter.put('/:id', (req: Request, res: Response) => {
 
+    const errors = videosUpdateDtoValidation(req.body);
+    if(errors.length > 0) {
+        res
+            .status(400)
+            .json(errors[0]);
+        return;
+    }
+
+    const foundVideo = db.videos.find(v => v.id === +req.params.id);
+    if(!foundVideo) {
+        res.sendStatus(404);
+        return;
+    } else {
+        foundVideo.title = req.body.title;
+        foundVideo.author = req.body.author;
+        foundVideo.availableResolutions = req.body.availableResolutions;
+        foundVideo.canBeDownloaded = req.body.canBeDownloaded;
+        foundVideo.minAgeRestriction = req.body.minAgeRestriction;
+        foundVideo.publicationDate = req.body.publicationDate;
+    }
+
+    res.sendStatus(204);
+})

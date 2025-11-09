@@ -31,7 +31,7 @@ export const videosInputDtoValidation = (
     ) {
         errors.push({
             message: 'Invalid available resolutions',
-            field: 'available resolutions',
+            field: 'availableResolutions',
         })
     }
 
