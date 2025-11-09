@@ -16,4 +16,6 @@ export const setupApp = (app: Express) => {
             .json({ message: 'Hello Incubator!' });
     })
 
+    return app;
+
 }
