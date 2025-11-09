@@ -12,6 +12,17 @@ videosRouter.get('/', (req: Request, res: Response) => {
         .status(200)
         .json(db.videos);
 });
+videosRouter.get('/:id', (req: Request, res: Response) => {
+    const foundVideo = db.videos.find(v => v.id === +req.params.id);
+    if (!foundVideo) {
+        res.sendStatus(404);
+        return;
+    }
+    res
+        .status(200)
+        .json(foundVideo);
+
+})
 videosRouter.post('/', (req: Request, res: Response) => {
     const errors = videosInputDtoValidation(req.body);
     if(errors.length > 0) {
