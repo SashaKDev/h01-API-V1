@@ -77,4 +77,14 @@ videosRouter.put('/:id', (req: Request, res: Response) => {
     }
 
     res.sendStatus(204);
+});
+videosRouter.delete('/:id', (req: Request, res: Response) => {
+    const foundVideo = db.videos.find(v => v.id === +req.params.id);
+    if(!foundVideo) {
+        res.sendStatus(404);
+        return;
+    }
+    db.videos = db.videos.filter(v => v.id !== +req.params.id);
+    res.sendStatus(204);
+
 })
