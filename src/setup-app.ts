@@ -7,8 +7,8 @@ export const setupApp = (app: Express) => {
 
     app.use(express.json());
 
-    app.use('/api/videos', videosRouter);
-    app.use('/api/testing', testingRouter);
+    app.use('/videos', videosRouter);
+    app.use('/testing', testingRouter);
 
     app.get('/', (req, res) => {
         res
