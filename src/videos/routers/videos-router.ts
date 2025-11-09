@@ -24,8 +24,7 @@ videosRouter.get('/:id', (req: Request, res: Response) => {
 
 })
 videosRouter.post('/', (req: Request, res: Response) => {
-    const errors = [];
-    errors.push(videosInputDtoValidation(req.body)[0]);
+    const errors = videosInputDtoValidation(req.body);
     if(errors.length > 0) {
         res
             .status(400)
@@ -56,8 +55,7 @@ videosRouter.post('/', (req: Request, res: Response) => {
 });
 videosRouter.put('/:id', (req: Request, res: Response) => {
 
-    const errors = [];
-    errors.push(videosUpdateDtoValidation(req.body)[0]);
+    const errors = videosUpdateDtoValidation(req.body);
     if(errors.length > 0) {
         res
             .status(400)
