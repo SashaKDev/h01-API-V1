@@ -1,5 +1,6 @@
 import {VideosInputDto} from "../dto/videos-input.dto";
 import {ValidationError} from "../types/validationError";
+import {AvailableResolutions} from "../types/types";
 
 
 export const videosInputDtoValidation = (
@@ -27,12 +28,23 @@ export const videosInputDtoValidation = (
         })
     }
     if (
+        !Array.isArray(data.availableResolutions) ||
         data.availableResolutions.length === 0
     ) {
         errors.push({
             message: 'Invalid available resolutions',
             field: 'availableResolutions',
         })
+    } else {
+        const existingResolutions = Object.values(AvailableResolutions);
+        for (let i = 0; i < data.availableResolutions.length; i++) {
+             if (!existingResolutions.includes(data.availableResolutions[i])) {
+                 errors.push({
+                     message: 'Invalid available resolutions',
+                     field: 'availableResolutions',
+                 })
+             }
+        }
     }
 
     return errors;
