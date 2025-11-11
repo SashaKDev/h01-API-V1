@@ -1,6 +1,7 @@
 import express, {Express} from "express";
 import {videosRouter} from "./videos/routers/videos-router";
 import {testingRouter} from "./testing/testing-router";
+import {setupSwagger} from "./core/swagger/setup-swagger";
 
 
 export const setupApp = (app: Express) => {
@@ -15,7 +16,7 @@ export const setupApp = (app: Express) => {
             .status(200)
             .json({ message: 'Hello Incubator!' });
     })
-
+    setupSwagger(app);
     return app;
 
 }
