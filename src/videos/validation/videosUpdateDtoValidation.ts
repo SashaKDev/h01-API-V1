@@ -36,6 +36,15 @@ export const videosUpdateDtoValidation = (
         })
     }
 
+    if (
+        typeof data.canBeDownloaded !== 'boolean'
+    ) {
+        errors.push({
+            message: 'Invalid canBeDownloaded status',
+            field: 'canBeDownloaded',
+        })
+    }
+
     if (data.minAgeRestriction !== null) {
         if (typeof data.minAgeRestriction === 'number'){
             if (
